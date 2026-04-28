@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SC Beats | Balneário Camboriú</title>
+    
+    <style>
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body { 
+            background-color: #0b0b0d; 
+            color: #fff; 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+        }
+
+        /* --- CABEÇALHO COM NOVA IMAGEM DA WEB --- */
+        header {
+            /* Link de imagem atualizado e estável */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), 
+                        url('https://s2-g1.glbimg.com/RpDd7UfUZJIXuUFauXLRAIRIzOk=/0x0:1200x675/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2024/4/F/9YfZIuQ66QUB31SHH8eQ/design-sem-nome-1-.png');
+            background-color: #0b0b0d;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            display: flex; justify-content: center; padding: 25px;
+            background: rgba(0,0,0,0.2); backdrop-filter: blur(5px);
+        }
+
+        .logo { font-size: 1.6rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+        .logo span { color: #00ffcc; }
+
+        .hero { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 { 
+            font-size: 3.5rem; 
+            text-transform: uppercase; 
+            letter-spacing: -1px; 
+            color: #fff;
+            text-shadow: 2px 2px 20px rgba(0,0,0,1);
+        }
+
+        .hero p { color: #00ffcc; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; font-size: 1rem; }
+
+        /* --- CARROSSEL --- */
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            padding: 50px 0;
+        }
+
+        .festa-row {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            gap: 25px;
+            padding: 20px 10vw;
+            scrollbar-width: none;
+        }
+
+        .festa-row::-webkit-scrollbar { display: none; }
+
+        .card-festa {
+            flex: 0 0 85vw;
+            max-width: 450px;
+            background: #161618; 
+            border-radius: 30px; 
+            overflow: hidden;
+            border: 1px solid #2a2a2c;
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .card-festa:hover { border-color: #00ffcc; transform: translateY(-5px); }
+
+        .card-img { height: 260px; width: 100%; background: #222; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .card-content { padding: 35px; text-align: center; flex-grow: 1; }
+        
+        .tag { font-size: 0.7rem; padding: 6px 14px; border-radius: 8px; text-transform: uppercase; font-weight: 800; margin-bottom: 15px; display: inline-block; }
+        .eletronico { background: #6600ff; color: white; }
+        .sertanejo { background: #ffcc00; color: #000; }
+        .lounge { background: #00ffcc; color: #000; }
+
+        h3 { font-size: 1.8rem; margin-bottom: 10px; font-weight: 800; }
+        .dj-highlight { color: #00ffcc; font-weight: 600; display: block; margin: 10px 0 30px 0; font-size: 1.1rem; }
+
+        .btn-link {
+            display: inline-block;
+            padding: 15px 30px;
+            background: transparent;
+            border: 2px solid #00ffcc;
+            color: #00ffcc;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-link:hover {
+            background: #00ffcc;
+            color: #000;
+            box-shadow: 0 10px 20px rgba(0, 255, 204, 0.3);
+        }
+
+        .nav-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0, 255, 204, 0.1); border: 1px solid rgba(0, 255, 204, 0.5);
+            color: #00ffcc; width: 55px; height: 55px; border-radius: 50%;
+            cursor: pointer; z-index: 10; transition: 0.3s; font-size: 1.2rem;
+            backdrop-filter: blur(5px);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .nav-btn:hover { background: #00ffcc; color: #000; }
+        .prev { left: 4%; }
+        .next { right: 4%; }
+
+        @media (max-width: 768px) { 
+            .nav-btn { display: none; } 
+            header { height: 40vh; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+
+        footer { text-align: center; padding: 60px; color: #333; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">SC<span>BEATS</span></div>
+        </nav>
+        <div class="hero">
+            <p>A energia do Litoral Norte</p>
+            <h1>Balneário Camboriú</h1>
+        </div>
+    </header>
+
+    <div class="carousel-wrapper">
+        <button class="nav-btn prev" onclick="scrollLeftBtn()">❮</button>
+        <button class="nav-btn next" onclick="scrollRightBtn()">❯</button>
+
+        <div class="festa-row" id="carousel">
+            
+            <div class="card-festa">
+                <div class="card-img"><img src="greenvalley.png" alt="Green Valley"></div>
+                <div class="card-content">
+                    <span class="tag eletronico">Eletrônico</span>
+                    <h3>Green Valley</h3>
+                    <span class="dj-highlight">Destaque: Bruno Be</span>
+                    <a href="https://www.google.com/maps/search/Green+Valley+Camboriu" target="_blank" class="btn-link">Ver Localização</a>
+                </div>
+            </div>
+
+            <div class="card-festa">
+                <div class="card-img"><img src="shed.png" alt="Shed Bar"></div>
+                <div class="card-content">
+                    <span class="tag sertanejo">Sertanejo</span>
+                    <h3>Shed Western Bar</h3>
+                    <span class="dj-highlight">DJs Open Format</span>
+                    <a href="https://www.google.com/maps/search/Shed+Western+Bar+BC" target="_blank" class="btn-link">Ver Localização</a>
+                </div>
+            </div>
+
+            <div class="card-festa">
+                <div class="card-img"><img src="taj.png" alt="TAJ Bar"></div>
+                <div class="card-content">
+                    <span class="tag lounge">Lounge</span>
+                    <h3>TAJ Bar</h3>
+                    <span class="dj-highlight">Prata: Maycon Schramm</span>
+                    <a href="https://www.google.com/maps/search/TAJ+Bar+BC" target="_blank" class="btn-link">Ver Localização</a>
+                </div>
+            </div>
+
+            <div class="card-festa">
+                <div class="card-img"><img src="dled.png" alt="D. Led Club"></div>
+                <div class="card-content">
+                    <span class="tag eletronico">Diversidade</span>
+                    <h3>D. Led Club</h3>
+                    <span class="dj-highlight">Residente: Felipe G.</span>
+                    <a href="https://www.google.com/maps/search/D.Led+Club+BC" target="_blank" class="btn-link">Ver Localização</a>
+                </div>
+            </div>
+
+            <div class="card-festa">
+                <div class="card-img"><img src="speedway.png" alt="Speedway"></div>
+                <div class="card-content">
+                    <span class="tag eletronico">Festivais</span>
+                    <h3>Speedway Park</h3>
+                    <span class="dj-highlight">Destaque: Lowderz</span>
+                    <a href="https://www.google.com/maps/search/Speedway+Music+Park+BC" target="_blank" class="btn-link">Ver Localização</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 SC BEATS | O SEU GUIA DA NOITE</p>
+    </footer>
+
+    <script>
+        const carousel = document.getElementById('carousel');
+        function scrollRightBtn() { carousel.scrollBy({ left: 450, behavior: 'smooth' }); }
+        function scrollLeftBtn() { carousel.scrollBy({ left: -450, behavior: 'smooth' }); }
+    </script>
+
+</body>
+</html>
